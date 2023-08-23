@@ -30,7 +30,7 @@
                     if(countdown === 0) {
                         clearInterval(interval)
                         setTimeout(() => {
-                            window.open(returnUrl);
+                            window.open(returnUrl, '_self');
                         }, 1000);
                     }
                 }, 1000)
