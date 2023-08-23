@@ -7,34 +7,40 @@
         <div id="countdownDisplay"></div>
         <p>Return url:</p>
         <div id="urlDisplay"></div>
+        <button id="returnButton">Return to return_url</button>
         <script>
             const countdownDisplay = document.getElementById("countdownDisplay");
             const urlDisplay = document.getElementById("urlDisplay");
+            const returnButton = document.getElementById("returnButton")
 
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const returnUrl = urlParams.get('return_url')
             const delay = urlParams.get('delay_s')
 
+            returnButton.addEventListener("mouseout", () => {
+                window.open(returnUrl, '_self');
+            })
+
             let countdown = delay ? delay : 3;
             
-            countdownDisplay.innerHTML = countdown;
+            // countdownDisplay.innerHTML = countdown;
             urlDisplay.innerHTML= returnUrl ? returnUrl : "URL is missing return_url query parameter.";
 
-            if(returnUrl) {
-                const interval = setInterval(() => {
-                    countdown--;
+            // if(returnUrl) {
+            //     const interval = setInterval(() => {
+            //         countdown--;
 
-                    countdownDisplay.innerHTML = countdown;
+            //         countdownDisplay.innerHTML = countdown;
 
-                    if(countdown === 0) {
-                        clearInterval(interval)
-                        setTimeout(() => {
-                            window.open(returnUrl, '_self');
-                        }, 1000);
-                    }
-                }, 1000)
-            }
+            //         if(countdown === 0) {
+            //             clearInterval(interval)
+            //             setTimeout(() => {
+            //                 window.open(returnUrl, '_self');
+            //             }, 1000);
+            //         }
+            //     }, 1000)
+            // }
         </script>
     </body>
 </html>
