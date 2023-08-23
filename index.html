@@ -19,20 +19,22 @@
             let countdown = delay ? delay : 3;
             
             countdownDisplay.innerHTML = countdown;
-            urlDisplay.innerHTML= returnUrl;
+            urlDisplay.innerHTML= returnUrl ? returnUrl : "URL is missing return_url query parameter.";
 
-            const interval = setInterval(() => {
-                countdown--;
+            if(returnUrl) {
+                const interval = setInterval(() => {
+                    countdown--;
 
-                countdownDisplay.innerHTML = countdown;
+                    countdownDisplay.innerHTML = countdown;
 
-                if(countdown === 0) {
-                    clearInterval(interval)
-                    setTimeout(() => {
-                        window.open(returnUrl);
-                    }, 1000);
-                }
-            }, 1000)
+                    if(countdown === 0) {
+                        clearInterval(interval)
+                        setTimeout(() => {
+                            window.open(returnUrl);
+                        }, 1000);
+                    }
+                }, 1000)
+            }
         </script>
     </body>
 </html>
