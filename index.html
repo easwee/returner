@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Returner</title>
+    </head>
+    <body>
+        <div id="countdownDisplay"></div>
+        <p>Return url:</p>
+        <div id="urlDisplay"></div>
+        <script>
+            const countdownDisplay = document.getElementById("countdownDisplay");
+            const urlDisplay = document.getElementById("urlDisplay");
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const returnUrl = urlParams.get('return_url')
+            const delay = urlParams.get('delay_s')
+
+            let countdown = delay ? delay : 3;
+            
+            countdownDisplay.innerHTML = countdown;
+            urlDisplay.innerHTML= returnUrl;
+
+            const interval = setInterval(() => {
+                countdown--;
+
+                countdownDisplay.innerHTML = countdown;
+
+                if(countdown === 0) {
+                    clearInterval(interval)
+                    setTimeout(() => {
+                        window.open(returnUrl);
+                    }, 1000);
+                }
+            }, 1000)
+        </script>
+    </body>
+</html>
